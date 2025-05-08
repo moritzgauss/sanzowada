@@ -147,6 +147,9 @@
         width: calc(100% - 20px);
         font-size: 0.8em;
         padding: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
     .footer-top {
         flex-direction: column-reverse; /* credits unter downloads */
@@ -172,6 +175,7 @@
     .credits {
         width: 100%;
         margin-top: 10px;
+        margin-bottom: 10px; /* Verhindert, dass es zu groß wird */
     }
 }
     </style>
