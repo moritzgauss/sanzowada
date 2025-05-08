@@ -57,10 +57,6 @@
     margin-bottom: 10px;
 }
 
-.credits a {
-    color: #ddd;
-    }
-
 .downloads {
     flex: 1 1 300px;
     display: flex;
@@ -90,6 +86,7 @@
 .downloads button:hover {
     background: #666;
 }
+
         #canvas {
             position: absolute;
             top: 0; left: 0;
@@ -125,25 +122,36 @@
         #infoBox span.cmyk {
             user-select: text;
         }
-        @media (max-width: 767px) {
-            footer {
-                width: calc(100% - 20px);
-                font-size: 0.8em;
-                padding: 5px;
-            }
+@media (max-width: 767px) {
+    footer {
+        width: calc(100% - 20px);
+        font-size: 0.8em;
+        padding: 5px;
+    }
+    .footer-top {
+        flex-direction: column-reverse; /* credits unter downloads */
+        align-items: center;
+        text-align: center;
+    }
     .downloads {
-        align-items: flex-end;
+        align-items: center;
+        width: 100%;
     }
     .button-row {
         display: flex;
-        gap: 2px; /* noch kleinerer Abstand */
-        flex-wrap: wrap; /* falls nötig, umbrechen */
+        gap: 2px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     .downloads button {
-        padding: 2px 4px; /* kleineres Padding */
-        font-size: 0.7em; /* kleinere Schriftgröße */
-        flex: 1;
-        margin-bottom: 3px; /* weniger Abstand nach unten */
+        padding: 4px 6px;
+        font-size: 0.7em;
+        flex: 1 1 auto;
+        margin-bottom: 3px;
+    }
+    .credits {
+        width: 100%;
+        margin-top: 10px;
     }
 }
     </style>
