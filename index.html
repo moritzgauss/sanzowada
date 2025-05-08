@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sanzo Wada Colors</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            background: #111;
+            color: white;
+            font-family: sans-serif;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+            margin: 30px 0 10px;
+            font-size: 3em;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            color: #ccc;
+        }
+        footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            font-size: 0.9em;
+        }
+        .downloads {
+            text-align: right;
+        }
+        .downloads button {
+            display: block;
+            margin-bottom: 5px;
+            background: #444;
+            border: none;
+            padding: 10px;
+            color: white;
+            cursor: pointer;
+        }
+        #canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sanzo Wada Colors</h1>
+    <p>Catch a dot to see its color codes</p>
+    <canvas id="canvas"></canvas>
+    <footer>
+        <div>
+            credits<br>
+            A project curated by Martin Keziah and Moritz Gauss.<br>
+            Color codes taken from <a href="https://www.wada-sanzo-colors.com" style="color:#888" target="_blank">wada-sanzo-colors.com</a>
+        </div>
+        <div class="downloads">
+            <button onclick="window.location.href='Sanzo_Wada_CMYK_Numbered.ase'">Download .ase file (adobe/affinity color palette) for cmyk colors ordered by color fade</button>
+            <button onclick="window.location.href='Sanzo_Wada_RGB.ase'">Download .ase file (adobe/affinity color palette) for rgb colors ordered by color fade</button>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        const dots = [];
+
+        const colors = [
+            {name: "Hermosa Pink", hex: "#ffb3f0", cmyk: "C:0 M:30 Y:6 K:0"},
+            {name: "Corinthian Pink", hex: "#ffa6d9", cmyk: "C:0 M:35 Y:15 K:0"},
+            {name: "Cameo Pink", hex: "#e6adcf", cmyk: "C:10 M:32 Y:19 K:0"},
+            {name: "Fawn", hex: "#d1b0b3", cmyk: "C:18 M:31 Y:30 K:0"},
+            {name: "Light Brown Drab", hex: "#b08699", cmyk: "C:8 M:30 Y:20 K:25"},
+            {name: "Coral Red", hex: "#ff7399", cmyk: "C:0 M:55 Y:40 K:0"},
+            {name: "Fresh Color", hex: "#ff788c", cmyk: "C:0 M:53 Y:45 K:0"},
+            {name: "Grenadine Pink", hex: "#ff616b", cmyk: "C:0 M:62 Y:58 K:0"},
+            // Add more as needed...
+        ];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Dot {
+            constructor(color) {
+                this.color = color;
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.r = 8;
+                this.dx = (Math.random() - 0.5) * 2;
+                this.dy = (Math.random() - 0.5) * 2;
+                this.selected = false;
+            }
+
+            update() {
+                if (!this.selected) {
+                    this.x += this.dx;
+                    this.y += this.dy;
+
+                    if (this.x < 0 || this.x > width) this.dx *= -1;
+                    if (this.y < 0 || this.y > height) this.dy *= -1;
+                } else {
+                    this.x += (width / 2 - this.x) * 0.1;
+                    this.y += (height / 2 - this.y) * 0.1;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                ctx.fillStyle = this.color.hex;
+                ctx.fill();
+
+                if (this.selected) {
+                    ctx.fillStyle = "white";
+                    ctx.textAlign = "center";
+                    ctx.font = "16px sans-serif";
+                    ctx.fillText(this.color.hex, width / 2, height / 2 - 30);
+                    ctx.fillText(this.color.cmyk, width / 2, height / 2);
+                }
+            }
+        }
+
+        colors.forEach(c => dots.push(new Dot(c)));
+
+        canvas.addEventListener('click', e => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            dots.forEach(dot => dot.selected = false);
+
+            for (let dot of dots) {
+                const dx = dot.x - mouseX;
+                const dy = dot.y - mouseY;
+                if (Math.sqrt(dx * dx + dy * dy) < dot.r + 5) {
+                    dot.selected = true;
+                    dot.r = 30;
+                } else {
+                    dot.r = 8;
+                }
+            }
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            dots.forEach(dot => {
+                dot.update();
+                dot.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
