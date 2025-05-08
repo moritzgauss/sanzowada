@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Wada Sanzo Dots & Download</title>
+    <title>Wada Sanzo Dots & Download</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Wada Sanzo Colors – An interactive display of traditional Japanese color palettes. Click a dot to view color details and copy its hex code.">
     <meta name="keywords" content="Wada Sanzo, Japanese colors, color palette, color combinations, interactive colors, CMYK, hex colors, design tool, color explorer">
@@ -30,7 +30,11 @@
         footer {
             position: fixed;
             bottom: 10px;
-            width: 100%;
+            width: calc(100% - 40px);
+            max-width: 1000px;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -39,12 +43,11 @@
             padding: 10px;
         }
         footer .footer-top {
+            width: 100%;
             display: flex;
             justify-content: space-between;
-            width: 100%;
-            max-width: 1000px;
-            margin-bottom: 10px;
             flex-wrap: wrap;
+            margin-bottom: 10px;
         }
         a {
             color: #888;
@@ -52,17 +55,18 @@
         }
         .downloads {
             text-align: right;
+            max-width: 100%;
         }
         .downloads button {
             background: #444;
             border: none;
             padding: 10px 20px;
-            margin: 5px;
+            margin: 5px 0;
             color: white;
             cursor: pointer;
             border-radius: 4px;
             transition: background 0.3s;
-            width: 100%; /* Ensures buttons are the same width */
+            width: auto;
         }
         .downloads button:hover {
             background: #666;
@@ -102,6 +106,16 @@
         #infoBox span.cmyk {
             user-select: text;
         }
+        @media (max-width: 767px) {
+            footer {
+                width: calc(100% - 20px);
+                font-size: 0.8em;
+                padding: 5px;
+            }
+            .downloads button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -112,23 +126,18 @@
     <div id="infoBox"></div>
     <footer>
         <div class="footer-top">
+            <div class="downloads">
+                <strong>Download palettes as .ase files (Adobe Color Palette to be importet in PS or Affinity etc)</strong><br>
+                <button onclick="confirmDownload('Sanzo_Wada_CMYK.ase')">Download CMYK palette</button>
+                <button onclick="confirmDownload('Sanzo_Wada_RGB.ase')">Download RGB palette</button>
+            </div>
             <div>
                 credits<br>
-                A project curated by Martin Keziah and Moritz Gauss.<br>
-                Color codes taken from <a href="https://www.wada-sanzo-colors.com" target="_blank">wada-sanzo-colors.com</a>
-            </div>
-            <div class="downloads">
-                <button onclick="confirmDownload('Sanzo_Wada_CMYK.ase')">Download .ase file (adobe/affinity color palette) for cmyk colors ordered by color fade</button>
-                <button onclick="confirmDownload('Sanzo_Wada_RGB.ase')">Download .ase file (adobe/affinity color palette) for rgb colors ordered by color fade</button>
+                A project by Martin Keziah Vella and Moritz Gauss<br>
+                Colors from <a href="https://www.wada-sanzo-colors.com" target="_blank">wada-sanzo-colors.com</a>
             </div>
         </div>
     </footer>
     <script src="script.js"></script>
-    <script>
-        function confirmDownload(file) {
-            const confirmed = confirm('Do you want to download the file "' + file + '"?');
-            if (confirmed) window.location.href = file;
-        }
-    </script>
 </body>
 </html>
