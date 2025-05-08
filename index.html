@@ -42,7 +42,7 @@
             padding: 10px;
         }
 
-         footer {
+        footer {
             position: fixed;
             bottom: 10px;
             width: calc(100% - 40px);
@@ -56,7 +56,6 @@
             background: rgba(0,0,0,0.5);
             padding: 10px;
         }
-        
 .footer-top {
     display: flex;
     justify-content: space-between;
@@ -106,7 +105,6 @@
 .downloads button:hover {
     background: #666;
 }
-
         #canvas {
             position: absolute;
             top: 0; left: 0;
@@ -142,40 +140,25 @@
         #infoBox span.cmyk {
             user-select: text;
         }
-@media (max-width: 767px) {
-    footer {
-        width: calc(100% - 20px);
-        font-size: 0.8em;
-        padding: 5px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    .footer-top {
-        flex-direction: column-reverse; /* credits unter downloads */
-        align-items: center;
-        text-align: center;
-    }
+        @media (max-width: 767px) {
+            footer {
+                width: calc(100% - 20px);
+                font-size: 0.8em;
+                padding: 5px;
+            }
     .downloads {
-        align-items: center;
-        width: 100%;
+        align-items: flex-end;
     }
     .button-row {
         display: flex;
-        gap: 2px;
-        flex-wrap: wrap;
-        justify-content: center;
+        gap: 2px; /* noch kleinerer Abstand */
+        flex-wrap: wrap; /* falls nötig, umbrechen */
     }
     .downloads button {
-        padding: 4px 6px;
-        font-size: 0.7em;
-        flex: 1 1 auto;
-        margin-bottom: 3px;
-    }
-    .credits {
-        width: 100%;
-        margin-top: 10px;
-        margin-bottom: 10px; /* Verhindert, dass es zu groß wird */
+        padding: 2px 4px; /* kleineres Padding */
+        font-size: 0.7em; /* kleinere Schriftgröße */
+        flex: 1;
+        margin-bottom: 3px; /* weniger Abstand nach unten */
     }
 }
     </style>
