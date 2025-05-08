@@ -1,7 +1,7 @@
+const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const tooltip = document.getElementById('tooltip');
 const infoBox = document.getElementById('infoBox');
-
 let width, height;
 const dots = [];
 let isMobile = window.innerWidth < 768;
@@ -22,7 +22,7 @@ class Dot {
         this.combinations = combinations;
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.r = isMobile ? 15 : 40; // Größerer Punkt auf Desktop, kleiner auf Mobile
+        this.r = isMobile ? 15 : 40;
         this.dx = (Math.random() - 0.5) * 2;
         this.dy = (Math.random() - 0.5) * 2;
         this.selected = false;
@@ -52,7 +52,7 @@ class Dot {
 
     draw() {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.selected ? 100 : this.r, 0, Math.PI * 2); // Punkt wächst bei Auswahl
+        ctx.arc(this.x, this.y, this.selected ? 100 : this.r, 0, Math.PI * 2);
         ctx.fillStyle = this.color.hex;
         ctx.fill();
     }
@@ -86,34 +86,46 @@ canvas.addEventListener('click', e => {
     }
 });
 
-canvas.addEventListener('mousemove', e => {
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+// Only enable tooltip on desktop
+if (!isMobile) {
+    canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
 
-    let hovered = null;
-    dots.forEach(dot => {
-        const dx = dot.x - mouseX;
-        const dy = dot.y - mouseY;
-        if (Math.sqrt(dx * dx + dy * dy) < dot.r + 5) hovered = dot;
+        let hovered = null;
+        dots.forEach(dot => {
+            const dx = dot.x - mouseX;
+            const dy = dot.y - mouseY;
+            if (Math.sqrt(dx * dx + dy * dy) < dot.r + 5) hovered = dot;
+        });
+
+        if (hovered) {
+            tooltip.style.left = e.clientX + 10 + 'px';
+            tooltip.style.top = e.clientY + 10 + 'px';
+            tooltip.innerHTML = `${hovered.color.name}<br>${hovered.color.hex}<br>${hovered.color.cmyk}`;
+            tooltip.style.display = 'block';
+        } else {
+            tooltip.style.display = 'none';
+        }
     });
-
-    if (hovered) {
-        tooltip.style.left = e.clientX + 10 + 'px';
-        tooltip.style.top = e.clientY + 10 + 'px';
-        tooltip.innerHTML = `${hovered.color.name}<br>${hovered.color.hex}<br>${hovered.color.cmyk}`;
-        tooltip.style.display = 'block';
-    } else {
-        tooltip.style.display = 'none';
-    }
-});
+}
 
 function animate() {
     ctx.clearRect(0, 0, width, height);
-    dots.forEach(dot => {
+
+    // draw unselected first
+    dots.filter(d => !d.selected).forEach(dot => {
         dot.update(dots);
         dot.draw();
     });
+
+    // draw selected on top
+    dots.filter(d => d.selected).forEach(dot => {
+        dot.update(dots);
+        dot.draw();
+    });
+
     requestAnimationFrame(animate);
 }
 
@@ -139,4 +151,9 @@ fetch('colors.json')
         startClusterCycle();
         animate();
     })
-    .catch(err => console.error('Fehler beim Laden der Farben:', err));
+    .catch(err => console.error('Error loading colors:', err));
+
+function confirmDownload(file) {
+    const confirmed = confirm('Do you want to download the file "' + file + '"?');
+    if (confirmed) window.location.href = file;
+}
