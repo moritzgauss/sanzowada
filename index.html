@@ -119,25 +119,27 @@
     </style>
 </head>
 <body>
-    <h1>Sanzo Wada Colors</h1>
+    <h1>Wada Sanzo Colors</h1>
     <p>Catch a dot to see its color codes</p>
     <canvas id="canvas"></canvas>
     <div id="tooltip"></div>
     <div id="infoBox"></div>
-    <footer>
-        <div class="footer-top">
-            <div class="downloads">
-                <strong>Download palettes as .ase files (Adobe Color Palette to be importet in PS or Affinity etc)</strong><br>
-                <button onclick="confirmDownload('Sanzo_Wada_CMYK.ase')">Download CMYK palette</button>
-                <button onclick="confirmDownload('Sanzo_Wada_RGB.ase')">Download RGB palette</button>
-            </div>
-            <div>
-                credits<br>
-                A project by Martin Keziah Vella and Moritz Gauss<br>
-                Colors from <a href="https://www.wada-sanzo-colors.com" target="_blank">wada-sanzo-colors.com</a>
-            </div>
+<footer>
+    <div class="footer-top">
+        <div class="downloads">
+            <strong>Download palettes</strong><br>
+            <button onclick="confirmDownload('Sanzo_Wada_CMYK.ase')">Download CMYK palette</button>
+            <button onclick="confirmDownload('Sanzo_Wada_RGB.ase')">Download RGB palette</button>
+            <button onclick="window.open('Sanzo_Wada_CMYK_Preview.pdf', '_blank')">View CMYK preview PDF</button>
+            <button onclick="window.open('Sanzo_Wada_RGB_Preview.pdf', '_blank')">View RGB preview PDF</button>
         </div>
-    </footer>
+        <div>
+            credits<br>
+            A project by Martin Keziah Vella and You Ts Wada Sanzo<br>
+            Colors from <a href="https://www.wada-sanzo-colors.com" target="_blank">wada-sanzo-colors.com</a>
+        </div>
+    </div>
+</footer>
     <script src="script.js"></script>
 </body>
 </html>
