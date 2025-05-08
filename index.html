@@ -135,16 +135,17 @@
         align-items: flex-end;
     }
     .button-row {
-    display: flex;
-    gap: 4px;
-    flex-wrap: nowrap;
+        display: flex;
+        gap: 2px; /* noch kleinerer Abstand */
+        flex-wrap: wrap; /* falls nötig, umbrechen */
     }
-.downloads button {
-    padding: 4px 6px;
+    .downloads button {
+        padding: 2px 4px; /* kleineres Padding */
+        font-size: 0.7em; /* kleinere Schriftgröße */
         flex: 1;
-        margin-bottom: 5px;
+        margin-bottom: 3px; /* weniger Abstand nach unten */
     }
-        }
+}
     </style>
 </head>
 <body>
@@ -158,7 +159,7 @@
     <div class="footer-top">
         <div class="credits">
             credits<br>
-            A project by Martin Keziah Vella and You Ts Wada Sanzo<br>
+            A project by <a href="https://instagram.com/martin_keziah_vella">Martin Keziah Vella</a> and <a href="https://moritzgauss.com">Moritz Gauss</a><br>
             Colors from <a href="https://www.wada-sanzo-colors.com" target="_blank">wada-sanzo-colors.com</a>
         </div>
         <div class="downloads">
