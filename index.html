@@ -42,35 +42,51 @@
             background: rgba(0,0,0,0.5);
             padding: 10px;
         }
-        footer .footer-top {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-        a {
-            color: #888;
-            text-decoration: none;
-        }
-        .downloads {
-            text-align: right;
-            max-width: 100%;
-        }
-        .downloads button {
-            background: #444;
-            border: none;
-            padding: 10px 20px;
-            margin: 5px 0;
-            color: white;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background 0.3s;
-            width: auto;
-        }
-        .downloads button:hover {
-            background: #666;
-        }
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 10px;
+    flex-wrap: wrap;
+}
+
+.credits {
+    flex: 1 1 250px;
+    margin-bottom: 10px;
+}
+
+.downloads {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.downloads button {
+    background: #444;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+    flex: 1 1 calc(50% - 5px);
+}
+
+.downloads button:hover {
+    background: #666;
+}
         #canvas {
             position: absolute;
             top: 0; left: 0;
@@ -112,9 +128,16 @@
                 font-size: 0.8em;
                 padding: 5px;
             }
-            .downloads button {
-                width: 100%;
-            }
+    .downloads {
+        align-items: flex-end;
+    }
+    .button-row {
+        flex-wrap: nowrap;
+    }
+    .downloads button {
+        flex: 1;
+        margin-bottom: 5px;
+    }
         }
     </style>
 </head>
@@ -124,19 +147,24 @@
     <canvas id="canvas"></canvas>
     <div id="tooltip"></div>
     <div id="infoBox"></div>
+
 <footer>
     <div class="footer-top">
-        <div class="downloads">
-            <strong>Download palettes</strong><br>
-            <button onclick="confirmDownload('Sanzo_Wada_CMYK.ase')">Download CMYK palette</button>
-            <button onclick="confirmDownload('Sanzo_Wada_RGB.ase')">Download RGB palette</button>
-            <button onclick="window.open('Sanzo_Wada_CMYK_Preview.pdf', '_blank')">View CMYK preview PDF</button>
-            <button onclick="window.open('Sanzo_Wada_RGB_Preview.pdf', '_blank')">View RGB preview PDF</button>
-        </div>
-        <div>
+        <div class="credits">
             credits<br>
             A project by Martin Keziah Vella and You Ts Wada Sanzo<br>
             Colors from <a href="https://www.wada-sanzo-colors.com" target="_blank">wada-sanzo-colors.com</a>
+        </div>
+        <div class="downloads">
+                    <strong>   Download palettes as .ase files (Adobe Color Palette to be importet in PS or Affinity etc)</strong><br>
+            <div class="button-row">
+                <button onclick="confirmDownload('Sanzo_Wada_CMYK.ase')">Download CMYK palette</button>
+                <button onclick="window.open('Sanzo_Wada_CMYK_Preview.pdf', '_blank')">Preview CMYK PDF</button>
+            </div>
+            <div class="button-row">
+                <button onclick="confirmDownload('Sanzo_Wada_RGB.ase')">Download RGB palette</button>
+                <button onclick="window.open('Sanzo_Wada_RGB_Preview.pdf', '_blank')">Preview RGB PDF</button>
+            </div>
         </div>
     </div>
 </footer>
