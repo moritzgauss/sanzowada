@@ -22,7 +22,7 @@ class Dot {
         this.combinations = combinations;
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.r = isMobile ? 15 : 40;
+        this.r = isMobile ? 15 : 20; // vorher war es 40, jetzt halbiert
         this.dx = (Math.random() - 0.5) * 2;
         this.dy = (Math.random() - 0.5) * 2;
         this.selected = false;
