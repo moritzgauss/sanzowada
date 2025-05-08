@@ -63,6 +63,15 @@
         .downloads button:hover {
             background: #666;
         }
+        @media (max-width: 768px) {
+            footer .footer-top {
+                flex-direction: column;
+                align-items: center;
+            }
+            .downloads {
+                text-align: center;
+            }
+        }
         #canvas {
             position: absolute;
             top: 0; left: 0;
@@ -79,25 +88,6 @@
             font-size: 12px;
             display: none;
         }
-        #infoBox {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.85);
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            display: none;
-            text-align: center;
-        }
-        #infoBox span {
-            display: block;
-            margin: 5px 0;
-        }
-        #infoBox span.cmyk {
-            user-select: text;
-        }
     </style>
 </head>
 <body>
@@ -105,7 +95,6 @@
     <p>Catch a dot to see its color codes</p>
     <canvas id="canvas"></canvas>
     <div id="tooltip"></div>
-    <div id="infoBox"></div>
     <footer>
         <div class="footer-top">
             <div>
