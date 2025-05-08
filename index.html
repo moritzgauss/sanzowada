@@ -50,12 +50,39 @@
     margin: 0 auto;
     padding: 0 10px;
     flex-wrap: wrap;
+}        footer {
+            position: fixed;
+            bottom: 10px;
+            width: calc(100% - 40px);
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1em;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+        }
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 10px;
+    flex-wrap: wrap;
 }
 
 .credits {
     flex: 1 1 250px;
     margin-bottom: 10px;
 }
+
+.credits a {
+    color: #ddd;
+    }
 
 .downloads {
     flex: 1 1 300px;
