@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Sanzo Wada Colors</title>
@@ -59,18 +57,10 @@
             cursor: pointer;
             border-radius: 4px;
             transition: background 0.3s;
+            width: 100%; /* Ensures buttons are the same width */
         }
         .downloads button:hover {
             background: #666;
-        }
-        @media (max-width: 768px) {
-            footer .footer-top {
-                flex-direction: column;
-                align-items: center;
-            }
-            .downloads {
-                text-align: center;
-            }
         }
         #canvas {
             position: absolute;
@@ -88,32 +78,24 @@
             font-size: 12px;
             display: none;
         }
+        #infoBox {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+            text-align: center;
+        }
+        #infoBox span {
+            display: block;
+            margin: 5px 0;
+        }
+        #infoBox span.cmyk {
+            user-select: text;
+        }
     </style>
 </head>
-<body>
-    <h1>Sanzo Wada Colors</h1>
-    <p>Catch a dot to see its color codes</p>
-    <canvas id="canvas"></canvas>
-    <div id="tooltip"></div>
-    <footer>
-        <div class="footer-top">
-            <div>
-                credits<br>
-                A project curated by Martin Keziah and Moritz Gauss.<br>
-                Color codes taken from <a href="https://www.wada-sanzo-colors.com" target="_blank">wada-sanzo-colors.com</a>
-            </div>
-            <div class="downloads">
-                <button onclick="confirmDownload('Sanzo_Wada_CMYK.ase')">Download .ase file (adobe/affinity color palette) for cmyk colors ordered by color fade</button>
-                <button onclick="confirmDownload('Sanzo_Wada_RGB.ase')">Download .ase file (adobe/affinity color palette) for rgb colors ordered by color fade</button>
-            </div>
-        </div>
-    </footer>
-    <script src="script.js"></script>
-    <script>
-        function confirmDownload(file) {
-            const confirmed = confirm('Do you want to download the file "' + file + '"?');
-            if (confirmed) window.location.href = file;
-        }
-    </script>
-</body>
-</html>
