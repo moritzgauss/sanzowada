@@ -76,7 +76,7 @@ h1 {
 
 .back-arrow {
     color: white;
-    text-decoration: none;
+    text-decoration: bold;
     margin: 0;
     font-size: 2em;
     transition: transform 0.2s;
