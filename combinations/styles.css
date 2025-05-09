@@ -59,13 +59,12 @@ h1 {
 
 .header-top {
     position: fixed;
-    top: 10px;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 10px;
     z-index: 1000;
 }
 
@@ -78,6 +77,7 @@ h1 {
 .back-arrow {
     color: white;
     text-decoration: none;
+    margin: 0;
     font-size: 2em;
     transition: transform 0.2s;
 }
@@ -155,13 +155,14 @@ h1 {
     .header-top {
         flex-direction: column;
         align-items: center;
-        gap: 15px;
+        gap: 4px;
     }
 
     .back-arrow {
         position: relative;
         left: 0;
         transform: none;
+        font-size: 1.2em;
     }
 
     .back-arrow:hover {
@@ -170,6 +171,6 @@ h1 {
 
     .header-top h1 {
         text-align: center;
-        font-size: 1.2em;
+        font-size: 1em;
     }
 }
