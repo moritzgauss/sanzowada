@@ -86,7 +86,7 @@ canvas.addEventListener('click', e => {
     }
 });
 
-// Only enable tooltip on desktop
+// In the mousemove event listener, update the cursor style:
 if (!isMobile) {
     canvas.addEventListener('mousemove', e => {
         const rect = canvas.getBoundingClientRect();
@@ -101,11 +101,13 @@ if (!isMobile) {
         });
 
         if (hovered) {
+            canvas.style.cursor = 'pointer';  // Add this line
             tooltip.style.left = e.clientX + 10 + 'px';
             tooltip.style.top = e.clientY + 10 + 'px';
             tooltip.innerHTML = `${hovered.color.name}<br>${hovered.color.hex}<br>${hovered.color.cmyk}`;
             tooltip.style.display = 'block';
         } else {
+            canvas.style.cursor = 'default';  // Add this line
             tooltip.style.display = 'none';
         }
     });

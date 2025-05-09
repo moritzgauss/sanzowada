@@ -18,16 +18,53 @@
             font-family: sans-serif;
             overflow: hidden;
         }
-        h1 {
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: calc(100% - 40px);
+            margin: 0 auto;
+            padding: 10px;
+            z-index: 10;
+        }
+
+        header h1 {
             text-align: center;
-            margin: 30px 10px 10px;
             font-size: 2.2em;
         }
-        p {
+        header h2 {
+            text-align: center;
+        }
+        header h2 a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        header h2 a:hover {
+            text-decoration: underline;
+        }
+        header h4 {
+            text-align: center;
+            margin: 0 10px 10px;
+            font-size: 1.2em;
+            color: #ccc;
+        }
+        header p {
             text-align: center;
             margin: 0 10px 20px;
             font-size: 1em;
             color: #ccc;
+        }
+
+        header a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        header a:hover {
+            color: white;
         }
 
         footer {
@@ -49,22 +86,28 @@
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    max-width: 1000px;
-    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 20px;
 }
 
 .credits {
+    flex: 1;
     margin-bottom: 10px;
 }
 
 .credits a {
-    color: #ddd;
-    }
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.credits a:hover {
+    color: white;
+}
 
 .downloads {
+    flex: 2;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
 }
 
 .button-row {
@@ -94,6 +137,10 @@
             top: 0; left: 0;
             width: 100%;
             height: 100%;
+            cursor: default;
+        }
+        #canvas:hover {
+            cursor: none;  /* Hide the default cursor when hovering the canvas */
         }
         #tooltip {
             position: fixed;
@@ -132,39 +179,45 @@
                 padding: 5px;
             }
              .footer-top {
-        flex-direction: column-reverse; /* credits unter downloads */
+        flex-direction: column-reverse;
         align-items: center;
         text-align: center;
+        gap: 10px;
     }
 
-    .downloads {
-        align-items: flex-end;
+    .credits, .downloads {
+        flex: none;
+        width: 100%;
     }
     .button-row {
         display: flex;
-        gap: 2px; /* noch kleinerer Abstand */
-        flex-wrap: wrap; /* falls nötig, umbrechen */
+        gap: 2px;
+        flex-wrap: wrap;
     }
     .downloads button {
-        padding: 2px 4px; /* kleineres Padding */
-        font-size: 0.7em; /* kleinere Schriftgröße */
+        padding: 2px 4px;
+        font-size: 0.7em;
         flex: 1;
-        margin-bottom: 3px; /* weniger Abstand nach unten */
+        margin-bottom: 3px;
     }
 }
     </style>
 </head>
 <body>
-    <h1>Sanzo Wada Colors</h1>
-<h4 style="text-align: center; margin: 0 10px 10px; z-index: 10;">
+
+<header>
+<h1>Sanzo Wada Colors </h1> 
+<h2><a href="/combinations" title="Explore Color Combinations">Explore Combinations →</a></h2>
+<h4>
   from 
-  <a href="https://g.co/kgs/HN66vmu" 
-     style="text-decoration: none; color: inherit; cursor: pointer;" 
+  <a href="https://g.co/kgs/HN66vmu" target="_blank" 
      title="A Dictionary of Color Combinations">
      配色総鑑
   </a>
 </h4>
     <p>Catch a dot to see its color codes</p>
+</header> 
+
     <canvas id="canvas"></canvas>
     <div id="tooltip"></div>
     <div id="infoBox"></div>
@@ -173,11 +226,11 @@
     <div class="footer-top">
         <div class="credits">
             credits<br>
-            A project by <a href="https://instagram.com/martin_keziah_vella">Martin Keziah Vella</a> and <a href="https://moritzgauss.com">Moritz Gauss</a><br>
+            A project by <a href="https://instagram.com/martin_keziah_vella" target="_blank">Martin Keziah Vella</a> and <a href="https://moritzgauss.com" target="_blank">Moritz Gauss</a><br>
             Colors from <a href="https://www.wada-sanzo-colors.com" target="_blank">wada-sanzo-colors.com</a>
         </div>
         <div class="downloads">
-                    <strong>   Download palettes as .ase files (Adobe Color Palette to be importet in PS or Affinity etc)</strong><br>
+                    <strong>   Download palettes as .ase files Adobe Color Palette to be importet in PS or Affinity etc</strong><br>
             <div class="button-row">
                 <button onclick="confirmDownload('Sanzo_Wada_CMYK.ase')">Download CMYK palette</button>
                 <button onclick="window.open('Sanzo_Wada_CMYK_Preview.pdf', '_blank')">Preview CMYK PDF</button>
