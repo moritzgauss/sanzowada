@@ -6,29 +6,34 @@ body, html {
     color: white;
     font-family: sans-serif;
 }
+
 h1 {
     text-align: center;
-    margin: 10px;
+    margin: 0;
     font-size: 1.5em;
 }
+
 #canvas {
     position: absolute;
     top: 0; left: 0;
     width: 100%;
     height: 100%;
+    cursor: default;
 }
+
 #infoBox {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 20px;
     border-radius: 8px;
     z-index: 1000;
 }
+
 #closeBtn {
     position: absolute;
     top: 5px;
@@ -38,4 +43,133 @@ h1 {
     color: white;
     font-weight: bold;
     cursor: pointer;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 1000;
+    font-size: 14px;
+}
+
+.header-top {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px;
+    z-index: 1000;
+}
+
+.header-top h1 {
+    margin: 0;
+    font-size: 1.5em;
+    color: white;
+}
+
+.back-arrow {
+    color: white;
+    text-decoration: none;
+    font-size: 2em;
+    transition: transform 0.2s;
+}
+
+.back-arrow:hover {
+    transform: translateX(-3px);
+}
+
+.bottom-info {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1000;
+}
+
+.bottom-info h4 {
+    margin: 0 0 10px 0;
+    font-weight: normal;
+    color: #fff;
+}
+
+.credits-link {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.credits-link:hover {
+    color: white;
+}
+
+.credits-popup {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    font-size: 0.9em;
+}
+
+.credits-popup a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.credits-popup a:hover {
+    color: white;
+}
+
+@media (max-width: 768px) {
+    #infoBox {
+        width: 80%;
+        max-width: 300px;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .tooltip {
+        display: none !important;
+    }
+    .credits-popup {
+        font-size: 0.8em;
+        padding: 8px 12px;
+    }
+
+    .header-top {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .back-arrow {
+        position: relative;
+        left: 0;
+        transform: none;
+    }
+
+    .back-arrow:hover {
+        transform: translateX(-3px);
+    }
+
+    .header-top h1 {
+        text-align: center;
+        font-size: 1.2em;
+    }
 }

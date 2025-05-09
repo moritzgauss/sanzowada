@@ -2,16 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sanzo Wada Cluster Colors</title>
+    <title>Sanzo Wada Combinations</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Sanzo Wada Combinations</h1>
+    <div class="header">
+        <div class="header-top">
+            <a href="/" class="back-arrow">←</a>
+            <h1>Sanzo Wada Color Combinations from the Book</h1>
+        </div>
+    </div>
     <canvas id="canvas"></canvas>
+    <div id="tooltip" class="tooltip"></div>
     <div id="infoBox">
         <button id="closeBtn">X</button>
         <div id="infoContent"></div>
+    </div>
+    <div class="bottom-info">
+        <h4>Click a Combination to view color details and copy hex codes of the colors.</h4>
+        <a href="#" class="credits-link">credits</a>
+        <div class="credits-popup">
+            A project by <a href="https://instagram.com/martin_keziah_vella" target="_blank">Martin Keziah Vella</a> and <a href="https://moritzgauss.com" target="_blank">Moritz Gauss</a><br>
+            Colors from <a href="https://www.wada-sanzo-colors.com" target="_blank">wada-sanzo-colors.com</a>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
