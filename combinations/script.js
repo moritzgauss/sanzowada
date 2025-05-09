@@ -12,9 +12,13 @@ window.addEventListener('resize', () => {
     positionClusters();
 });
 
-closeBtn.addEventListener('click', () => infoBox.style.display = 'none');
+closeBtn.addEventListener('click', () => {
+    infoBox.style.display = 'none';
+    enlargedCluster = null;
+});
 
 let clusters = [];
+let enlargedCluster = null;
 
 fetch('colors.json')
 .then(res => res.json())
@@ -33,9 +37,8 @@ fetch('colors.json')
             id: id,
             colors: colors.slice(0, 4),
             center: { x: 0, y: 0 },
-            floatOffset: { dx: (Math.random() - 0.5) * 0.5, dy: (Math.random() - 0.5) * 0.5 },
-            hexes: [],
-            dots: []
+            floatOffset: { dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.4 },
+            hexes: colors.slice(0, 4).map(c => c.hex)
         }));
 
     positionClusters();
@@ -43,14 +46,24 @@ fetch('colors.json')
 });
 
 function positionClusters() {
-    const cols = Math.floor(width / 200);
+    const cols = Math.floor(width / 120);
     clusters.forEach((cluster, i) => {
         const col = i % cols;
         const row = Math.floor(i / cols);
-        cluster.center.x = col * 200 + 100;
-        cluster.center.y = row * 200 + 100;
-        cluster.hexes = cluster.colors.map(c => c.hex);
+        cluster.center.x = col * 120 + 60;
+        cluster.center.y = row * 120 + 60;
     });
+}
+
+function getClusterDots(cluster, scale = 1) {
+    const baseR = 10 * scale;
+    const { x, y } = cluster.center;
+    return [
+        { x: x, y: y - 20 * scale, r: baseR, color: cluster.colors[0] },
+        { x: x - 20 * scale, y: y, r: baseR, color: cluster.colors[1] },
+        { x: x + 20 * scale, y: y, r: baseR, color: cluster.colors[2] },
+        { x: x, y: y + 20 * scale, r: baseR, color: cluster.colors[3] }
+    ];
 }
 
 canvas.addEventListener('click', (e) => {
@@ -62,28 +75,18 @@ canvas.addEventListener('click', (e) => {
         for (const dot of dots) {
             const dx = dot.x - x;
             const dy = dot.y - y;
-            if (Math.sqrt(dx * dx + dy * dy) < 20) {
+            if (Math.sqrt(dx * dx + dy * dy) < dot.r + 5) {
                 const name = generateName(cluster.colors, cluster.id);
                 const cmykList = cluster.colors.map(c => `<small>${c.cmyk}</small>`).join('<br>');
                 infoContent.innerHTML = `<h2>${name}</h2><p>${cluster.hexes.join('<br>')}</p><hr>${cmykList}`;
                 navigator.clipboard.writeText(cluster.hexes.join(', '));
                 infoBox.style.display = 'block';
+                enlargedCluster = cluster;
                 return;
             }
         }
     }
 });
-
-function getClusterDots(cluster) {
-    const r = 20;
-    const { x, y } = cluster.center;
-    return [
-        { x: x, y: y - 40, color: cluster.colors[0] },
-        { x: x - 30, y: y, color: cluster.colors[1] },
-        { x: x + 30, y: y, color: cluster.colors[2] },
-        { x: x, y: y + 40, color: cluster.colors[3] }
-    ];
-}
 
 function animate() {
     ctx.clearRect(0, 0, width, height);
@@ -91,19 +94,18 @@ function animate() {
         cluster.center.x += cluster.floatOffset.dx;
         cluster.center.y += cluster.floatOffset.dy;
 
-        // Bounce inside canvas
-        if (cluster.center.x < 50 || cluster.center.x > width - 50) cluster.floatOffset.dx *= -1;
-        if (cluster.center.y < 50 || cluster.center.y > height - 50) cluster.floatOffset.dy *= -1;
+        // bounce
+        if (cluster.center.x < 30 || cluster.center.x > width - 30) cluster.floatOffset.dx *= -1;
+        if (cluster.center.y < 30 || cluster.center.y > height - 30) cluster.floatOffset.dy *= -1;
 
-        const dots = getClusterDots(cluster);
+        const scale = (cluster === enlargedCluster) ? 4 : 1;
+        const dots = getClusterDots(cluster, scale);
         dots.forEach(dot => {
             ctx.beginPath();
-            ctx.arc(dot.x, dot.y, 20, 0, Math.PI * 2);
+            ctx.arc(dot.x, dot.y, dot.r, 0, Math.PI * 2);
             ctx.fillStyle = dot.color.hex;
             ctx.fill();
         });
-
-        cluster.dots = dots;
     });
 
     requestAnimationFrame(animate);
