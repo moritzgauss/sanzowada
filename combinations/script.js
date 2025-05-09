@@ -49,7 +49,7 @@ fetch('colors.json')
 
 function positionClusters() {
     // Use smaller spacing on mobile
-    const spacing = window.innerWidth <= 768 ? 80 : 120;
+    const spacing = window.innerWidth <= 768 ? 60 : 120;
     const cols = Math.floor(width / spacing);
     
     clusters.forEach((cluster, i) => {
